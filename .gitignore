@@ -159,5 +159,6 @@ Thumbs.db #thumbnail cache on Windows
 # Ignore all local history of files
 .history
 .ionide
-
+.idea
+.DS_Store
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
