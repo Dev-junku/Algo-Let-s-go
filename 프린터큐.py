@@ -3,7 +3,7 @@ from collections import deque
 
 
 T = int(stdin.readline().rstrip())
-
+  
 for t in range(1, T+1):
     print_list = deque()
     idx_list = deque()
