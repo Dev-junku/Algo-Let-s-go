@@ -60,14 +60,12 @@ PR title : `문제번호 : 문제이름`
 $ git clone
 
 $ git remote add upstream [프로젝트 url]
-
 ```
 
 ### 브랜치 만들기
 
 ```
-$ Branch - git branch -b [브랜치 이름]
-
+$ branch - git branch -b [브랜치 이름]
 ```
 
 ### 작업하기
@@ -147,7 +145,6 @@ $ git push origin :[브랜치이름]
 ```
 $ git push origin master
 ```
-
 
 
 
