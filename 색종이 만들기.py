@@ -35,7 +35,7 @@ def div(start_x, end_x, start_y, end_y):
     div(start_x, (start_x+end_x)//2, start_y, (start_y+end_y)//2)
     div((start_x+end_x)//2+1, end_x, start_y, (start_y+end_y)//2)
     div((start_x+end_x)//2+1, end_x, (start_y+end_y)//2 + 1, end_y)
-
+  
 div(0, N-1, 0, N-1)
 
 print(zero_cnt)
