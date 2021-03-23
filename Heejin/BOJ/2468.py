@@ -37,7 +37,7 @@ for limit in range(m, M + 1):
     for col in range(N):
         for row in range(N):
             # 1이라면
-            if visited[col][row] == 1:
+            if visited[col][row] == 햣1:
                 bfs(col, row)
                 area_count += 1
 
