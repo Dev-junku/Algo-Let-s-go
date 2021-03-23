@@ -20,7 +20,6 @@ area = [list(map(int, input().split(' '))) for _ in range(N)]
 visited = [[0] * N for _ in range(N)]
 m = min([min(L) for L in area])
 M = max([max(L) for L in area])
-MAX = 1
 
 max_area_count = 1
 for limit in range(m, M + 1):
