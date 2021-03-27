@@ -31,10 +31,7 @@ def solution(N, M, row, col, k):
 
 def check(cnt, M, k):
     cost = k * k + (k - 1) * (k - 1)
-
-    if M * cnt - cost > 0:
-        return cnt
-    return 0
+    return cost
 
 
 T = int(input())
