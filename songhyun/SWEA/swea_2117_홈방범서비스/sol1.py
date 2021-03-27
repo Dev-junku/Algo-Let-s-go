@@ -45,7 +45,7 @@ for tc in range(1, 1+T):
     for idx in range(N):
         matrix[idx] = list(map(int, input().split()))
     # print(matrix)
-    move = [[-1,0], [0,1], [1,0], [0,-1]]           #상우하좌 아 미친 여기 좌표틀림 이거때매 계속 틀림 ㅅㅂ
+    move = [[-1,0], [0,1], [1,0], [0,-1]]           #상우하좌 아.. 여기 좌표틀림 이거때매 계속 틀림...ㅠㅠㅠ
     for row in range(N):
         for col in range(N):
             for k in range(1, N):
