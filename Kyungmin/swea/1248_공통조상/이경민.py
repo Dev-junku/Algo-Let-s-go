@@ -57,7 +57,7 @@ for tc in range(1, T+1):
         if n in parent_B:
             commons.append(n)
     # 가장 가까운 공통 조상
-    common = max(commons)
+    common = commons[0]
     size = 1
     subtree(common)
     print('#{} {} {}'.format(tc, common, size))
