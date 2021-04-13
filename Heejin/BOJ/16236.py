@@ -1,59 +1,73 @@
 import sys
 sys.stdin = open("input.txt")
 
+INF = 1e9
+
 dcol = [-1, 1, 0, 0]
 drow = [0, 0, -1, 1]
 target_spot = []
-def bfs(col, row):
+def bfs():
     global baby, fish_food, distance
+    dist = [[-1] * length for _ in range(length)]
     # 현재 아기 상어 자리.
-    queue = [(col, row)]
+    queue = [(now_col, now_row)]
+    dist[now_col][now_row] = 0
     while queue:
         # 단계를 알 수 있게 하는 for문.
-        for _ in range(len(queue)):
-            distance += 1 # 한 단계 지날 때 마다 상어로부터 거리 하나씩 늘어가.
-            ccol, crow = queue.pop()
-            for i in range(4):
-                ncol = ccol + dcol[i]
-                nrow = crow + drow[i]
+        cur_col, cur_row = queue.pop(0)
+        for i in range(4):
+            ncol, nrow = cur_col + dcol[i], cur_row + drow[i]
+            if 0 <= ncol < length and 0 <= nrow < length:
+                if dist[ncol][nrow] == -1 and matrix[ncol][nrow] <= shark_size:
+                    dist[ncol][nrow] = dist[cur_col][cur_row] + 1
+                    queue.append((ncol, nrow))
+    return dist
 
-                if 0 <= ncol < length and 0 <= nrow < length:
-                    # 만약에 범위 안에 들고, 아기 상어보다 작다면, 갈 수 있는 지점임.
-                    if 0 < matrix[ncol][nrow] < baby:
-                        target_spot.append((ncol, nrow))
 
-            # 포문이 끝나고 target_spot에 뭐라도 있으면 하나씩 살펴봄.
-            if len(target_spot) > 0:
-                # target_spot을 맨위, 맨 왼쪽이 기준이므로 맨위로 먼저 정렬, 그다음 맨 왼쪽으로 정렬함.
-                target_spot.sort(key=lambda x: (x[0], x[1]))
-                # 정렬된 맨 앞이 이동할 곳
-                first_target_spot = target_spot.pop(0)
-                # 물고기 먹은 자리에 0
-                matrix[first_target_spot[0]][first_target_spot[1]] = 0
-                # 상어가 고기 한마리 먹음.
-                fish_food += 1
-                # 상어가 고기 자기크기 만큼 먹으면 1 커짐
-                if fish_food == baby:
-                    baby += 1
-                    fish_food = 0
-                # 현재 상어자리 초기화 0
-                matrix[ccol][crow] = 0
-                # 상어가 그 자리로 이동
-                queue.append(first_target_spot)
+def find(dist):
+    min_dist = INF
+    x = y = 0
+    for col in range(length):
+        for row in range(length):
+            if dist[col][row] != -1 and 1 <= matrix[col][row] < shark_size:
+                if dist[col][row] < min_dist:
+                    # 작은애 갱신 해주고,
+                    min_dist = dist[col][row]
+                    x, y = col, row
+    if min_dist == INF:
+        return None
+    else:
+        return x, y, min_dist
+
+
 
 length = int(input())
 matrix = [list(map(int, input().split())) for _ in range(length)]
 
 # 아기상어의 위치 찾기
-baby = 9
-fish_food = 0
-distance = 0
+shark_size = 2
+now_col, now_row = 0, 0
 for col in range(length):
     for row in range(length):
-        if matrix[col][row] == baby:
-            bfs(col, row)
-# 1. 먹을 수 있는 물고기 1개면 그거 먹으러감
-# 2. 먹을수 있는게 많으면 가장 가까운애.
-# 3. 거리 가까운애 많으면 젤 위, 여러마리면 젤 왼쪽.
+        if matrix[col][row] == 9:
+            now_col = col
+            now_row = row
+            matrix[col][row] = 0
+result = 0
+ate = 0
+while True:
+    value = find(bfs())
 
-# 상어가 다 먹었을 때 어떻게 체크하지?
+    if value == None:
+        print(result)
+        break
+    else:
+        now_col, now_row = value[0], value[1]
+        result += value[2]
+
+        matrix[now_col][now_row] = 0
+        ate += 1
+
+        if ate >= shark_size:
+            shark_size += 1
+            ate = 0
