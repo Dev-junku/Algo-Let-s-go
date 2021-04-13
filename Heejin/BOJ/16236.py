@@ -1,11 +1,8 @@
-import sys
-sys.stdin = open("input.txt")
-
 INF = 1e9
 
 dcol = [-1, 1, 0, 0]
 drow = [0, 0, -1, 1]
-target_spot = []
+
 def bfs():
     global baby, fish_food, distance
     dist = [[-1] * length for _ in range(length)]
@@ -13,7 +10,6 @@ def bfs():
     queue = [(now_col, now_row)]
     dist[now_col][now_row] = 0
     while queue:
-        # 단계를 알 수 있게 하는 for문.
         cur_col, cur_row = queue.pop(0)
         for i in range(4):
             ncol, nrow = cur_col + dcol[i], cur_row + drow[i]
@@ -38,7 +34,6 @@ def find(dist):
         return None
     else:
         return x, y, min_dist
-
 
 
 length = int(input())
