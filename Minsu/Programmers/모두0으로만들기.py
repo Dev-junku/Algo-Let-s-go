@@ -34,27 +34,17 @@ def solution(a, edges):
                     break
             else:
                 return turn
-            current = stack.pop(0)
+            current = stack.pop()
             turn += abs(a[current])
             visited[current] = 1
 
-            print(Vertex)
-            print(a)
-            print(current)
-            print(visited)
             for node in Vertex[current]:
                 if visited[node] == False:
                     a[node] += a[current]
                     a[current] = 0
                     stack.append(node)
 
-
-
     return turn
-
-
-
-
 
 
 print(solution([-5,0,2,1,2], [[0,1],[3,4],[2,3],[0,3]]))
