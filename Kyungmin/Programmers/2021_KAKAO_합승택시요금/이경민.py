@@ -13,6 +13,7 @@ def solution(n, s, a, b, fares):
         matrix[fare[0]][fare[1]] = fare[2]
         matrix[fare[1]][fare[0]] = fare[2]
     # 플로이드-워셜 알고리즘 적용
+    print(matrix)
     for k in range(n+1):
         for y in range(n+1):
             for x in range(n+1):
